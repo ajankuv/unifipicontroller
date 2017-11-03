@@ -12,17 +12,13 @@ RUN echo 'deb http://www.ubnt.com/downloads/unifi/debian stable ubiquiti' | sudo
 
 RUN echo 'ENABLE_MONGODB=no' | sudo tee -a /etc/mongodb.conf > /dev/null
 
-#RUN cd /usr/lib/unifi/lib \
-#    && rm snappy-java-1.0.5.jar \
-#    && wget https://repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.4-M3/snappy-java-1.1.4-M3.jar \
-#    && ln -s snappy-java-1.1.4-M3.jar snappy-java-1.0.5.jar
-
 RUN apt-get install oracle-java8-jdk -y \
     && echo 'JAVA_HOME=/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt' | sudo tee /etc/default/unifi > /dev/null
+
+RUN ln -s /var/lib/unifi /opt/unifi/data
 
 EXPOSE 8080/tcp 8443/tcp 8880/tcp 8843/tcp
 
 WORKDIR /var/lib/unifi
-
-ENTRYPOINT ["/usr/bin/java", "-Xmx1024M", "-jar", "/var/lib/unifi/lib/ace.jar"]
+ENTRYPOINT ["/usr/bin/java", "-Xmx1024M", "-jar", "/opt/unifi/data/lib/ace.jar"]
 CMD ["start"]
