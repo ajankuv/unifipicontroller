@@ -21,4 +21,5 @@ RUN apt-get install oracle-java8-jdk -y \
 
 EXPOSE 8080 8443 8880 8843
 COPY docker-entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
