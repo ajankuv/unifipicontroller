@@ -16,7 +16,7 @@ RUN apt-get install oracle-java8-jdk -y \
     && echo 'JAVA_HOME=/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt' | sudo tee /etc/default/unifi > /dev/null
 
 RUN mkdir -p /opt/unifi/data \
-    && ln - s /usr/lib/unifi /opt/unifi/data
+    && ln -s /usr/lib/unifi /opt/unifi/data
 
 EXPOSE 8080/tcp 8443/tcp 8880/tcp 8843/tcp
 
